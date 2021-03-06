@@ -6,7 +6,7 @@ from conans.tools import Version
 
 class CAFConan(ConanFile):
     name = "caf"
-    version = "0.17.6"
+    version = "0.18.0"
     description = "An open source implementation of the Actor Model in C++"
     url = "https://github.com/bincrafters/conan-caf"
     homepage = "https://github.com/actor-framework/actor-framework"
@@ -42,7 +42,7 @@ class CAFConan(ConanFile):
                 del self.options.openssl
 
     def source(self):
-        sha256 = "e2bf5bd243f08bb7d8adde197cfe3e6d71314ed3378fe0692f8932f4c3b3928c"
+        sha256 = "df765fa78861e67d44e2587c0ac0c1c662d8c93fe5ffc8757f552fc7ac15941f"
         tools.get("{}/archive/{}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         os.rename("actor-framework-" + self.version, self._source_subfolder)
 
@@ -101,10 +101,10 @@ class CAFConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        suffix = "_static" if self._is_static else ""
-        self.cpp_info.libs = ["caf_io%s" % suffix, "caf_core%s" % suffix]
+        self.cpp_info.libs = ["caf_io", "caf_core",]
+        self.cpp_info.libdirs = ["lib"]
         if self._has_openssl:
-            self.cpp_info.libs.append("caf_openssl%s" % suffix)
+            self.cpp_info.libs.append("caf_openssl")
         if self.settings.os == "Windows":
             self.cpp_info.system_libs.extend(["ws2_32", "iphlpapi", "psapi"])
         elif self.settings.os == "Linux":

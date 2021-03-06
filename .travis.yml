@@ -44,5 +44,8 @@ matrix:
       - stage: default
         <<: *linux
         env: CONAN_CLANG_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/clang9
+      - stage: default
+        <<: *linux
+        env: CONAN_CLANG_VERSIONS=10 CONAN_DOCKER_IMAGE=conanio/clang10
 
 import: bincrafters/templates:.ci/travis-macos.yml@12f4883f65fcbc521d7425636083ce9bba4be5cd
